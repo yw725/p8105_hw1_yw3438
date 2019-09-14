@@ -1,0 +1,84 @@
+---
+title: "p8105_hw1_yw3438"
+output: github_document
+author: "Yuning Wang"
+---
+
+# Problem 1
+
+## First Code Chunk
+Here's the first code chunk for problem 1:
+
+```{r message=FALSE}
+library(tidyverse)
+
+problem1_df = tibble(
+  ran_sample = rnorm(8),
+  gr_th_0_logical = ran_sample > 0,
+  vec_character = c("This", "is", "the", "answer", "of", "problem", "one", "here"),
+  vec_factor = factor(c("white", "black", "black", "red", "white", "red", "black", "white"), levels = c("white", "black", "red") )
+)
+
+lapply(problem1_df, mean)
+##The clss of vec_character is character and the class of vec_factor is fact.##
+##The mean of vec_character and vec_factor cannot be calculated, because they are neither numerical nor logical vectors##
+```
+
+## Second Code Chunk
+Here's the second code chunk for problem 1:
+```{r}
+##convert the logical vector to numeric, and multiply the random sample by the result##
+gr_th_0_num = as.numeric(problem1_df$gr_th_0_logical)
+prod(gr_th_0_num)
+
+##convert the logical vector to a factor, and multiply the random sample by the result##
+gr_th_0_fac = as.factor(problem1_df$gr_th_0_logical)
+#gr_th_0_fac_pro = prod(gr_th_0_fac)
+#the random sample cannot be mutiplied as it's factor. I have to put it into a comment because the whole Rmd will break down if it's in the code.
+
+##convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result##
+gr_th_0_fac_num = as.numeric(as.factor(problem1_df$gr_th_0_logical))
+prod(gr_th_0_fac_num)
+```
+
+
+
+# Problem 2
+
+```{r}
+problem2_df = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  vec_logic2 = x + y > 1,
+  vec_num2 = as.numeric(vec_logic2),
+  vec_fac2 = as.factor(vec_logic2)
+)
+```
+The size of this dataset can be described by its columns and rows. The number of the columns is `r ncol(problem2_df)` and the number of the rows of the dataset is `r nrow(problem2_df)`.
+
+The mean of x is `r mean(problem2_df$x)`, the median of x is `r median(problem2_df$x)` and the standard deviation of x is `r sd(problem2_df$x)`.
+
+The proportion of cases for which x + y > 1 is `r sum(problem2_df$vec_num2)/length(problem2_df$vec_num2)`
+
+## The Scatterplot of x and y
+
+### Color points using logical variables
+```{r}
+ggplot(problem2_df, aes(x = x, y = y)) + geom_point(aes(color = vec_logic2))
+```
+
+### Color points using the numeric variables
+```{r}
+ggplot(problem2_df, aes(x = x, y = y)) + geom_point(aes(color = vec_num2))
+```
+
+### Color points using the factor variables
+```{r}
+ggplot(problem2_df, aes(x = x, y = y)) + geom_point(aes(color = vec_fac2))
+```
+
+```{r}
+##save the first plot##
+logic_color_plot = ggplot(problem2_df, aes(x = x, y = y)) + geom_point(aes(color = vec_logic2))
+ggsave("logic_color_plot.pdf", logic_color_plot, width = 8, height = 5)
+```
