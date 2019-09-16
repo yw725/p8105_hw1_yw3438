@@ -2,6 +2,7 @@
 title: "p8105_hw1_yw3438"
 output: github_document
 author: "Yuning Wang"
+date: 15/09/2019
 ---
 
 # Problem 1
@@ -29,16 +30,17 @@ Here's the second code chunk for problem 1:
 ```{r}
 ##convert the logical vector to numeric, and multiply the random sample by the result##
 gr_th_0_num = as.numeric(problem1_df$gr_th_0_logical)
-prod(gr_th_0_num)
+(gr_th_0_num)*(problem1_df$ran_sample)
 
 ##convert the logical vector to a factor, and multiply the random sample by the result##
 gr_th_0_fac = as.factor(problem1_df$gr_th_0_logical)
-#gr_th_0_fac_pro = prod(gr_th_0_fac)
-#the random sample cannot be mutiplied as it's factor. I have to put it into a comment because the whole Rmd will break down if it's in the code.
+gr_th_0_fac_pro = (gr_th_0_fac)*(problem1_df$ran_sample)
+gr_th_0_fac_pro
+#the random sample cannot be mutiplied as it's factor. 
 
 ##convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result##
 gr_th_0_fac_num = as.numeric(as.factor(problem1_df$gr_th_0_logical))
-prod(gr_th_0_fac_num)
+(gr_th_0_fac_num)*(problem1_df$ran_sample)
 ```
 
 
