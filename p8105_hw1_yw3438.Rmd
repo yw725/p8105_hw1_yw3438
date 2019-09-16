@@ -29,18 +29,19 @@ lapply(problem1_df, mean)
 Here's the second code chunk for problem 1:
 ```{r}
 ##convert the logical vector to numeric, and multiply the random sample by the result##
-gr_th_0_num = as.numeric(problem1_df$gr_th_0_logical)
-(gr_th_0_num)*(problem1_df$ran_sample)
+gr_th_0_num = as.numeric(pull(problem1_df, gr_th_0_logical))
+(gr_th_0_num)*(pull(problem1_df, ran_sample))
 
 ##convert the logical vector to a factor, and multiply the random sample by the result##
-gr_th_0_fac = as.factor(problem1_df$gr_th_0_logical)
-gr_th_0_fac_pro = (gr_th_0_fac)*(problem1_df$ran_sample)
+gr_th_0_fac = as.factor(pull(problem1_df, gr_th_0_logical))
+gr_th_0_fac_pro = (gr_th_0_fac)*(pull(problem1_df, ran_sample))
 gr_th_0_fac_pro
 #the random sample cannot be mutiplied as it's factor. 
 
 ##convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result##
-gr_th_0_fac_num = as.numeric(as.factor(problem1_df$gr_th_0_logical))
-(gr_th_0_fac_num)*(problem1_df$ran_sample)
+gr_th_0_fac_num = as.numeric(as.factor
+                             (pull(problem1_df, gr_th_0_logical)))
+(gr_th_0_fac_num)*(pull(problem1_df, ran_sample))
 ```
 
 
@@ -58,9 +59,9 @@ problem2_df = tibble(
 ```
 The size of this dataset can be described by its columns and rows. The number of the columns is `r ncol(problem2_df)` and the number of the rows of the dataset is `r nrow(problem2_df)`.
 
-The mean of x is `r mean(problem2_df$x)`, the median of x is `r median(problem2_df$x)` and the standard deviation of x is `r sd(problem2_df$x)`.
+The mean of x is `r mean(pull(problem2_df, x))`, the median of x is `r median(problem2_df$x)` and the standard deviation of x is `r sd(pull(problem2_df, x))`.
 
-The proportion of cases for which x + y > 1 is `r sum(problem2_df$vec_num2)/length(problem2_df$vec_num2)`
+The proportion of cases for which x + y > 1 is `r sum(pull(problem2_df, vec_num2))/length(pull(problem2_df, vec_num2))`
 
 ## The Scatterplot of x and y
 
